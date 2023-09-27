@@ -25,15 +25,19 @@ window.addEventListener('DOMContentLoaded', function () {
 
     //Taking rates of currencies
 
+    const lastRequestTime = localStorage.getItem('lastRequestTime');
+    const now = Date.now();
     const API_KEY = '2ca12bfc303bef7845a1e97d4792edfb';
     const usdAPI = `https://open.er-api.com/v6/latest/USD?apikey=${API_KEY}`;
     const rubAPI = `https://open.er-api.com/v6/latest/RUB?apikey=${API_KEY}`;
     const eurAPI = `https://open.er-api.com/v6/latest/EUR?apikey=${API_KEY}`;
     const gelAPI = `https://open.er-api.com/v6/latest/GEL?apikey=${API_KEY}`;
 
+if (!lastRequestTime || now - lastRequestTime > 86400000) {
     fetch(rubAPI)
         .then(response => response.json())
         .then(data => {
+            localStorage.setItem('data', JSON.stringify(data));
             rubRates(data.rates);
         })
         .catch(error => {
@@ -43,6 +47,7 @@ window.addEventListener('DOMContentLoaded', function () {
     fetch(usdAPI)
         .then(response => response.json())
         .then(data => {
+            localStorage.setItem('data', JSON.stringify(data));
             usdRates(data.rates);
         })
         .catch(error => {
@@ -52,6 +57,7 @@ window.addEventListener('DOMContentLoaded', function () {
     fetch(eurAPI)
         .then(response => response.json())
         .then(data => {
+            localStorage.setItem('data', JSON.stringify(data));
             eurRates(data.rates);
             console.log(data.rates);
         })
@@ -62,12 +68,15 @@ window.addEventListener('DOMContentLoaded', function () {
     fetch(gelAPI)
         .then(response => response.json())
         .then(data => {
+            localStorage.setItem('data', JSON.stringify(data));
             gelRates(data.rates);
         })
         .catch(error => {
             console.error("Error when receiving exchange rates:", error);
         });
 
+    localStorage.setItem('lastRequestTime', now.toString());
+};
 
 
     //Show rates on the site
