@@ -89,3 +89,11 @@ input {
     flex-wrap: wrap;
     justify-content: space-around;
 }
+
+.show {
+    display: block;
+}
+
+.hide {
+    display: none;
+}

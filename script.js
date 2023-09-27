@@ -6,6 +6,7 @@ window.addEventListener('DOMContentLoaded', function () {
         calcEur = document.querySelector('.calc-eur'),
         calcLar = document.querySelector('.calc-lar'),
         calcRub = document.querySelector('.calc-rub'),
+        recieveHide = document.querySelectorAll('.recieve-block'),
         inputNum = document.querySelector('.input'),
         rubUsd = document.querySelector('.rub-dol-calc'),
         rubEur = document.querySelector('.rub-eur-calc'),
@@ -14,10 +15,10 @@ window.addEventListener('DOMContentLoaded', function () {
         usdEur = document.querySelector('.dol-eur-calc'),
         usdGel = document.querySelector('.dol-lar-calc'),
         eurRub = document.querySelector('.eur-rub-calc'),
-        eurUsd = document.querySelector('.eur-usd-calc'),
-        eurGel = document.querySelector('.eur-gel-calc'),
+        eurUsd = document.querySelector('.eur-dol-calc'),
+        eurGel = document.querySelector('.eur-lar-calc'),
         gelRub = document.querySelector('.lar-rub-calc'),
-        gelUsd = document.querySelector('.lar-usd-calc'),
+        gelUsd = document.querySelector('.lar-dol-calc'),
         gelEur = document.querySelector('.lar-eur-calc');
 
 
@@ -120,9 +121,20 @@ window.addEventListener('DOMContentLoaded', function () {
         gelUsd.textContent = gelUsd_API.toFixed(2);
     };
     
-
+   
 
     //Calculate Inputed Currency
+
+    function showHideCalc (curr) {
+        for (let i = 0; i < recieveHide.length; i++) {
+            if (recieveHide[i].classList.contains('hide')) {
+                recieveHide[i].classList.remove('hide');
+                recieveHide[i].classList.add('show');
+            }
+
+            recieveHide[curr].classList.add('hide');
+        }
+    };
 
     function caclCurrency () {
 
@@ -131,31 +143,31 @@ window.addEventListener('DOMContentLoaded', function () {
                 calcDol.textContent = (inputNum.value * rubUsd_API).toFixed(2);
                 calcEur.textContent = (inputNum.value * rubEur_API).toFixed(2);
                 calcLar.textContent = (inputNum.value * rubGel_API).toFixed(2);
-                calcRub.textContent = (inputNum.value * 1).toFixed(2);
+                showHideCalc(3);
             };
 
         if (selectOpt.value === 'USD') {
 
-                calcDol.textContent = (inputNum.value * 1).toFixed(2);
                 calcEur.textContent = (inputNum.value * usdEur_API).toFixed(2);
                 calcLar.textContent = (inputNum.value * usdGel_API).toFixed(2);
-                calcRub.textContent = (inputNum.value * usdRub_API).toFixed(2);;
+                calcRub.textContent = (inputNum.value * usdRub_API).toFixed(2);
+                showHideCalc(0);
             };
 
         if (selectOpt.value === 'EUR') {
 
                 calcDol.textContent = (inputNum.value * eurUsd_API).toFixed(2);
-                calcEur.textContent = (inputNum.value * 1).toFixed(2);
                 calcLar.textContent = (inputNum.value * eurGel_API).toFixed(2);
-                calcRub.textContent = (inputNum.value * eurRub_API).toFixed(2);;
+                calcRub.textContent = (inputNum.value * eurRub_API).toFixed(2);
+                showHideCalc(1);
             };
         
         if (selectOpt.value === 'GEL') {
 
                 calcDol.textContent = (inputNum.value * gelUsd_API).toFixed(2);
                 calcEur.textContent = (inputNum.value * gelEur_API).toFixed(2);
-                calcLar.textContent = (inputNum.value * 1).toFixed(2);
-                calcRub.textContent = (inputNum.value * gelRub_API).toFixed(2);;
+                calcRub.textContent = (inputNum.value * gelRub_API).toFixed(2);
+                showHideCalc(2);
             };
     }
 
