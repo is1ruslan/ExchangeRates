@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:300,400,700&amp;subset=cyrillic-ext" rel="stylesheet">
+    <link rel="stylesheet" href="./style.css">
+    <script src="./script.js"></script>
+    <link rel="icon" type="image/svg" href="./xt.com-logo.webp">
+    <title>Exchange rate</title>
+</head>
+<body>
+    <header>
+
+    </header>
+    
+    <div class="container">
+        <div class="first-block">
+            <div class="first-block-title">Currency Exchange rate</div>
+            <div class="cur-courses">
+                <div class="rub">
+                    <div class="1rub cur">1 RUB</div>
+                    <div class="rub-dol"><span class="rub-dol-calc" >0.01</span>$</div>
+                    <div class="rub-eur"><span class="rub-eur-calc" >0.0098</span>€</div>
+                    <div class="rub-lar"><span class="rub-lar-calc" >0.028</span>₾</div>
+                </div>
+                <div class="usd">
+                    <div class="1dol cur">1 DOL</div>
+                    <div class="dol-rub"><span class="dol-rub-calc RUB" >96.05</span>₽</div>
+                    <div class="dol-eur"><span class="dol-eur-calc EUR" >0.94</span>€</div>
+                    <div class="dol-lar"><span class="dol-lar-calc GEL" >2.69</span>₾</div>
+                </div>
+                <div class="eur">
+                    <div class="1eur cur">1 EUR</div>
+                    <div class="eur-rub"><span class="eur-rub-calc" >96.05</span>₽</div>
+                    <div class="eur-dol"><span class="eur-dol-calc" >0</span>$</div>
+                    <div class="eur-lar"><span class="eur-lar-calc" >0</span>₾</div>
+                </div>
+                <div class="gel">
+                    <div class="1lar cur">1 LAR</div>
+                    <div class="lar-rub"><span class="lar-rub-calc" >96.05</span>₽</div>
+                    <div class="lar-eur"><span class="lar-eur-calc" >2.69</span>€</div>
+                    <div class="lar-dol"><span class="lar-dol-calc" >0</span>$</div>
+                </div>
+            </div>
+                <div class="select-title">Choose your currency</div>
+            <select class="select">
+                <option id="RUB">RUB</option>
+                <option id="USD">USD</option>
+                <option id="EUR">EUR</option>
+                <option id="GEL">GEL</option>
+            </select>
+
+                <div class="input-title">Input the amount of your currency</div>
+            <div class="inputs">
+                <input type="number" placeholder="" class="input">
+            </div>
+                <div class="recieve-title">You'll recieve</div>
+                <div class="recieve">
+                    <div class="recieve-block">
+                        <div class="recieve-dol"><span class="calc-dol"></span>$</div>
+                    </div>
+                    <div class="recieve-block">
+                        <div class="recieve-eur"><span class="calc-eur"></span>€</div>
+                    </div>
+                    <div class="recieve-block">
+                        <div class="recieve-lar"><span class="calc-lar"></span>₾</div>
+                    </div>
+                    <div class="recieve-block">
+                        <div class="recieve-rub"><span class="calc-rub"></span>₽</div>
+                    </div>
+                </div>
+        </div>
+    </div>
+</body>
+</html>
