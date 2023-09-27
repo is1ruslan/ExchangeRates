@@ -23,63 +23,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
 
 
-    //Taking rates of currencies
-
-    const lastRequestTime = localStorage.getItem('lastRequestTime');
-    const now = Date.now();
-    const API_KEY = '2ca12bfc303bef7845a1e97d4792edfb';
-    const usdAPI = `https://open.er-api.com/v6/latest/USD?apikey=${API_KEY}`;
-    const rubAPI = `https://open.er-api.com/v6/latest/RUB?apikey=${API_KEY}`;
-    const eurAPI = `https://open.er-api.com/v6/latest/EUR?apikey=${API_KEY}`;
-    const gelAPI = `https://open.er-api.com/v6/latest/GEL?apikey=${API_KEY}`;
-
-if (!lastRequestTime || now - lastRequestTime > 86400000) {
-    fetch(rubAPI)
-        .then(response => response.json())
-        .then(data => {
-            localStorage.setItem('data', JSON.stringify(data));
-            rubRates(data.rates);
-        })
-        .catch(error => {
-            console.error("Error when receiving exchange rates:", error);
-        });
-
-    fetch(usdAPI)
-        .then(response => response.json())
-        .then(data => {
-            localStorage.setItem('data', JSON.stringify(data));
-            usdRates(data.rates);
-        })
-        .catch(error => {
-            console.error("Error when receiving exchange rates:", error);
-        });
-    
-    fetch(eurAPI)
-        .then(response => response.json())
-        .then(data => {
-            localStorage.setItem('data', JSON.stringify(data));
-            eurRates(data.rates);
-            console.log(data.rates);
-        })
-        .catch(error => {
-            console.error("Error when receiving exchange rates:", error);
-        });  
-
-    fetch(gelAPI)
-        .then(response => response.json())
-        .then(data => {
-            localStorage.setItem('data', JSON.stringify(data));
-            gelRates(data.rates);
-        })
-        .catch(error => {
-            console.error("Error when receiving exchange rates:", error);
-        });
-
-    localStorage.setItem('lastRequestTime', now.toString());
-};
-
-
-    //Show rates on the site
+//Show rates on the site
 
     let rubUsd_API = 0,
         rubEur_API = 0,
@@ -129,8 +73,76 @@ if (!lastRequestTime || now - lastRequestTime > 86400000) {
         gelEur.textContent = gelEur_API.toFixed(2);
         gelUsd.textContent = gelUsd_API.toFixed(2);
     };
+
+
+    //Taking rates of currencies
+
+    const lastRequestTime = localStorage.getItem('lastRequestTime');
+    const now = Date.now();
+    const API_KEY = '2ca12bfc303bef7845a1e97d4792edfb';
+    const usdAPI = `https://open.er-api.com/v6/latest/USD?apikey=${API_KEY}`;
+    const rubAPI = `https://open.er-api.com/v6/latest/RUB?apikey=${API_KEY}`;
+    const eurAPI = `https://open.er-api.com/v6/latest/EUR?apikey=${API_KEY}`;
+    const gelAPI = `https://open.er-api.com/v6/latest/GEL?apikey=${API_KEY}`;
+
+if (!lastRequestTime || now - lastRequestTime > 86400000) {
+    fetch(rubAPI)
+        .then(response => response.json())
+        .then(data => {
+            localStorage.setItem('dataRUB', JSON.stringify(data));
+            let dataRUB = JSON.parse(localStorage.getItem('dataRUB'));
+            rubRates(dataRUB.rates);
+        })
+        .catch(error => {
+            console.error("Error when receiving exchange rates:", error);
+        });
+
+    fetch(usdAPI)
+        .then(response => response.json())
+        .then(data => {
+            localStorage.setItem('dataUSD', JSON.stringify(data));
+            let dataUSD = JSON.parse(localStorage.getItem('dataUSD'));
+            usdRates(dataUSD.rates);
+        })
+        .catch(error => {
+            console.error("Error when receiving exchange rates:", error);
+        });
     
-   
+    fetch(eurAPI)
+        .then(response => response.json())
+        .then(data => {
+            localStorage.setItem('dataEUR', JSON.stringify(data));
+            let dataEUR = JSON.parse(localStorage.getItem('dataEUR'));
+            eurRates(dataEUR.rates);
+            console.log(data.rates);
+        })
+        .catch(error => {
+            console.error("Error when receiving exchange rates:", error);
+        });  
+
+    fetch(gelAPI)
+        .then(response => response.json())
+        .then(data => {
+            localStorage.setItem('dataGEL', JSON.stringify(data));
+            let dataGEL = JSON.parse(localStorage.getItem('dataGEL'));
+            gelRates(dataGEL.rates);
+        })
+        .catch(error => {
+            console.error("Error when receiving exchange rates:", error);
+        });
+
+    localStorage.setItem('lastRequestTime', now.toString());
+} else {
+    let dataRUB = JSON.parse(localStorage.getItem('dataRUB'));
+    let dataUSD = JSON.parse(localStorage.getItem('dataUSD'));
+    let dataEUR = JSON.parse(localStorage.getItem('dataEUR'));
+    let dataGEL = JSON.parse(localStorage.getItem('dataGEL'));
+    rubRates(dataRUB.rates);
+    usdRates(dataUSD.rates);
+    eurRates(dataEUR.rates);
+    gelRates(dataGEL.rates);
+};
+
 
     //Calculate Inputed Currency
 
